@@ -1,0 +1,49 @@
+name: Example Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  get-sha:
+    runs-on: ubuntu-latest
+    outputs:
+      short_sha: ${{ steps.get_sha.outputs.short_sha }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get 7-digit Git SHA
+        id: get_sha
+        run: |
+          SHORT_SHA=$(git rev-parse --short=7 HEAD)
+          echo "short_sha=$SHORT_SHA" >> $GITHUB_ENV
+          echo "::set-output name=short_sha::$SHORT_SHA"
+
+  job1:
+    needs: get-sha
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use short SHA in job1
+        run: |
+          echo "The short SHA from job1 is ${{ needs.get-sha.outputs.short_sha }}"
+          
+      # You can use ${{ needs.get-sha.outputs.short_sha }} in this job as well.
+
+  job2:
+    needs: get-sha
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use short SHA in job2
+        run: |
+          echo "The short SHA from job2 is ${{ needs.get-sha.outputs.short_sha }}"
+          
+      # You can use ${{ needs.get-sha.outputs.short_sha }} in this job as well.
