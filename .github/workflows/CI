@@ -1,9 +1,7 @@
 name: Example Workflow
 
 on:
-  push:
-    branches:
-      - main
+  worklow_dispatch:
 
 jobs:
   get-sha:
