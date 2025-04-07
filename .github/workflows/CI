@@ -2,6 +2,9 @@ name: Example Workflow
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   get-sha:
