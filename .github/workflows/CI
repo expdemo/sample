@@ -1,7 +1,7 @@
 name: Example Workflow
 
 on:
-  worklow_dispatch:
+  workflow_dispatch:
 
 jobs:
   get-sha:
