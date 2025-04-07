@@ -9,42 +9,32 @@ on:
 jobs:
   get-sha:
     runs-on: ubuntu-latest
-    outputs:
-      short_sha: ${{ steps.get_sha.outputs.short_sha }}
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Get 7-digit Git SHA
-        id: get_sha
-        run: |
-          SHORT_SHA=$(git rev-parse --short=7 HEAD)
-          echo "short_sha=$SHORT_SHA" >> $GITHUB_ENV
-          echo "::set-output name=short_sha::$SHORT_SHA"
+      - name: Get short SHA
+        run: echo "SHORT_SHA=$("${{ github.sha }}".SubString(0, 7))" >> $env:GITHUB_ENV
 
   job1:
     needs: get-sha
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use short SHA in job1
         run: |
-          echo "The short SHA from job1 is ${{ needs.get-sha.outputs.short_sha }}"
+          echo "The short SHA from job1 is ${{ env.SHORT_SHA }}}"
           
-      # You can use ${{ needs.get-sha.outputs.short_sha }} in this job as well.
-
   job2:
-    needs: get-sha
+    needs: job1
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use short SHA in job2
         run: |
-          echo "The short SHA from job2 is ${{ needs.get-sha.outputs.short_sha }}"
+          echo "The short SHA from job2 is ${{ env.SHORT_SHA }}"
           
-      # You can use ${{ needs.get-sha.outputs.short_sha }} in this job as well.
