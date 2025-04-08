@@ -25,7 +25,7 @@ jobs:
 
       - name: Use short SHA in job1
         run: |
-          echo "The short SHA from job1 is ${{ env.SHORT_SHA }}}"
+          echo "The short SHA from job1 is ${{ env.SHORT_SHA }}"
           
   job2:
     needs: job1
