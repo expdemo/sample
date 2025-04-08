@@ -1,11 +1,11 @@
 name: Example Workflow
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
-
+  workflow_dispatch:
+  
 jobs:
   get-sha:
     runs-on: ubuntu-latest
