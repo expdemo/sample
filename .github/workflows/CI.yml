@@ -20,6 +20,7 @@ jobs:
 
       - name: Display SHORT_SHA  
         run: echo "The short SHA is: ${{ env.SHORT_SHA }}"
+        
   test-sha:
     runs-on: ubuntu-latest
     steps:
