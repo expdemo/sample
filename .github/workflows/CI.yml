@@ -28,3 +28,5 @@ jobs:
     steps:
       - name: Test SHORT_SHA
         run: echo $env.SHORT_SHA
+        env:
+          SHORT_SHA: ${{ env.SHORT_SHA }}
