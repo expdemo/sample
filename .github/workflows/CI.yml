@@ -22,12 +22,8 @@ jobs:
           
       - name: Print short SHA
         run: |
-          echo $env:GIT_SHORT_SHA
-          echo "The short SHA from job1 is: ${{ steps.set_short_sha.outputs.short_sha }}"
-        
-      - name: Print short SHA
-        run: echo ${{ env.GIT_SHORT_SHA }}
-        
+          echo %GIT_SHORT_SHA%
+                
   test-sha:
     runs-on: ubuntu-latest
     needs: get-sha
