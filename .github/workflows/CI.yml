@@ -9,8 +9,6 @@ on:
 jobs:
   get-sha:
     runs-on: windows-latest
-    outputs:  
-      git_short_sha: ${{ steps.set_short_sha.outputs.git_short_sha }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -33,6 +31,6 @@ jobs:
     steps:
       - name: Test SHORT_SHA
         run: |
-          echo "The short SHA from job1 is: steps.set_short_sha.outputs.short"
+          echo "The short SHA from job1 is: ${{ steps.set_short_sha.outputs.short }}"
         
           
