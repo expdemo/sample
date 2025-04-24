@@ -20,8 +20,10 @@ jobs:
 
       - name: Get short SHA
         id: set_short_sha
-        run: echo "GIT_SHORT_SHA=$("${{ github.sha }}".SubString(0, 7))" >> %GITHUB_OUTPUT%
-        
+        run: |
+          echo "GIT_SHORT_SHA=$("${{ github.sha }}".SubString(0, 7))" >> $env:GITHUB_ENV
+          echo "::set-output name=short::${{ env.GIT_SHORT_SHA }}
+          
       - name: Print short SHA
         run: echo $env:GIT_SHORT_SHA
         
@@ -34,6 +36,6 @@ jobs:
     steps:
       - name: Test SHORT_SHA
         run: |
-          echo "The short SHA from job1 is: ${{ needs.get-sha.outputs.git_short_sha }}"
+          echo "The short SHA from job1 is: $short"
         
           
