@@ -30,6 +30,6 @@ jobs:
     needs: get-sha
     steps:
       - name: Test SHORT_SHA
-        run: echo ${{ env.GIT_SHORT_SHA }}
-        env:
-          SHORT_SHA: ${{ env.GIT_SHORT_SHA }}
+        run: |
+          $sha = "${{ env.GIT_SHORT_SHA }}"
+          echo $sha
