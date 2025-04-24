@@ -20,7 +20,9 @@ jobs:
           echo "::set-output name=short::${{ env.GIT_SHORT_SHA }}"
           
       - name: Print short SHA
-        run: echo $env:GIT_SHORT_SHA
+        run: |
+          echo $env:GIT_SHORT_SHA
+          echo "The short SHA from job1 is: ${{ steps.set_short_sha.outputs.short }}"
         
       - name: Print short SHA
         run: echo ${{ env.GIT_SHORT_SHA }}
