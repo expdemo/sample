@@ -1,0 +1,38 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      GIT_SHA: ${{ steps.get_sha.outputs.sha }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get commit hash
+        id: get_sha
+        run: echo "sha=$(git rev-parse HEAD)" >> $GITHUB_ENV
+
+      - name: Build the project
+        run: |
+          echo "Building project..."
+          # You can use ${{ steps.get_sha.outputs.sha }} here if needed for the build step
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Access GIT_SHA from previous job
+        run: |
+          echo "The commit hash from the build job is ${{ needs.build.outputs.GIT_SHA }}"
+          # You can use this GIT_SHA in the deployment step
