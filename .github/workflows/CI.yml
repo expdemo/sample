@@ -25,10 +25,7 @@ jobs:
   test-sha:
     runs-on: windows-latest
     needs: getsha
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        
+    steps:      
       - name: Test SHORT_SHA
         run: |
           echo "The commit hash from the build job is ${{ needs.getsha.outputs.GIT_SHA }}"    
