@@ -36,5 +36,5 @@ jobs:
     steps:      
       - name: Again test SHORT_SHA
         run: |
-          echo ${{ needs.getsha.outputs.GIT_SHA }}
+          echo "${{ needs.getsha.outputs.GIT_SHA }}"
         
