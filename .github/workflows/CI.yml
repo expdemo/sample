@@ -25,7 +25,7 @@ jobs:
           echo "Short sha is $short_sha"
                 
   test-sha:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: get-sha
     steps:
       - name: Test SHORT_SHA
