@@ -1,0 +1,35 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+    outputs:
+      GIT_SHA: ${{ steps.get_sha.outputs.sha }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get commit hash
+        id: get_sha
+        run: |
+          $sha = git rev-parse HEAD
+          echo "sha=$sha" >> $env:GITHUB_ENV
+          echo "::set-output name=sha::$sha"
+
+  deploy:
+    needs: build
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Access GIT_SHA from build job
+        run: |
+          echo "The commit hash from the build job is ${{ needs.build.outputs.GIT_SHA }}"
