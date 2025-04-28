@@ -17,12 +17,12 @@ jobs:
 
       - name: Get commit hash
         id: get_sha
-        run: echo "sha=$(git rev-parse HEAD)" >> $GITHUB_ENV
-
-      - name: Build the project
         run: |
-          echo "Building project..."
-          # You can use ${{ steps.get_sha.outputs.sha }} here if needed for the build step
+          echo "sha=$(git rev-parse HEAD)" >> $GITHUB_ENV
+
+      - name: Set output for GIT_SHA
+        id: set_output
+        run: echo "sha=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
   deploy:
     needs: build
@@ -35,4 +35,3 @@ jobs:
       - name: Access GIT_SHA from previous job
         run: |
           echo "The commit hash from the build job is ${{ needs.build.outputs.GIT_SHA }}"
-          # You can use this GIT_SHA in the deployment step
