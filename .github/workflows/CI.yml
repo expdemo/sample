@@ -32,7 +32,7 @@ jobs:
 
   TESTING:
     runs-on: windows-latest
-    needs: testsha
+    needs: [ testsha, getsha ]
     steps:      
       - name: Again test SHORT_SHA
         run: |
