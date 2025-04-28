@@ -20,8 +20,6 @@ jobs:
         run: |
           $GIT_SHORT_SHA= $("${{ github.sha }}".SubString(0, 7))
           echo "Git short sha is $GIT_SHORT_SHA"
-          echo $GIT_SHORT_SHA >> $env:GITHUB_ENV
-          echo "Git sha is $GIT_SHORT_SHA"
           echo "::set-output name=sha::$GIT_SHORT_SHA"
                         
   test-sha:
