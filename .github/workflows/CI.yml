@@ -22,11 +22,19 @@ jobs:
           echo "Git short sha is $GIT_SHORT_SHA"
           echo "::set-output name=sha::$GIT_SHORT_SHA"
                         
-  test-sha:
+  testsha:
     runs-on: windows-latest
     needs: getsha
     steps:      
       - name: Test SHORT_SHA
         run: |
           echo "The commit hash from the build job is ${{ needs.getsha.outputs.GIT_SHA }}"    
+
+  TESTING:
+    runs-on: windows-latest
+    needs: testsha
+    steps:      
+      - name: Again test SHORT_SHA
+        run: |
+          echo ${{ needs.getsha.outputs.GIT_SHA }}
         
