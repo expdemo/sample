@@ -22,7 +22,7 @@ jobs:
         env:
           short_sha: ${{ steps.set_short_sha.outputs.GIT_SHORT_SHA }}
         run: |
-          echo "Short sha is $GIT_SHORT_SHA"
+          echo "Short sha is $short_sha"
                 
   test-sha:
     runs-on: ubuntu-latest
