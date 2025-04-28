@@ -17,12 +17,7 @@ jobs:
 
       - name: Get commit hash
         id: get_sha
-        run: |
-          echo "sha=$(git rev-parse HEAD)" >> $GITHUB_ENV
-
-      - name: Set output for GIT_SHA
-        id: set_output
-        run: echo "sha=$(git rev-parse HEAD)" >> $GITHUB_ENV
+        run: echo "::set-output name=sha::$(git rev-parse HEAD)"
 
   deploy:
     needs: build
@@ -32,6 +27,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Access GIT_SHA from previous job
+      - name: Access GIT_SHA from build job
         run: |
           echo "The commit hash from the build job is ${{ needs.build.outputs.GIT_SHA }}"
