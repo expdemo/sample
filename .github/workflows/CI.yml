@@ -10,7 +10,7 @@ jobs:
   getsha:
     runs-on: windows-latest
     outputs:
-      GIT_SHA: ${{ steps.get_sha.outputs.sha }}
+      GIT_SHA: ${{ steps.set_short_sha.outputs.sha }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
